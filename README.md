@@ -60,3 +60,9 @@ If you want to learn more about building native executables, please consult http
 Easily start your Reactive RESTful Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+## Commit guidelines
+We're currently using the [github-tag-with-semantic-versioning](https://github.com/marketplace/actions/github-tag-with-semantic-versioning) action. It purportedly supports [angular commit conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).
+
+## Image publishing
+Images are currently published under the zagaoss user account [on dockerhub](https://hub.docker.com/u/zagaoss).
