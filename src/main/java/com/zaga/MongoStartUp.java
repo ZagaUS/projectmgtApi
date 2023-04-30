@@ -47,18 +47,21 @@ public class MongoStartUp {
 
             MongoCollection<Document> collection = database.getCollection("counter");
 
-            URL resource = getClass().getClassLoader().getResource("CounterCollection.json");
+            // URL resource =
+            // getClass().getClassLoader().getResource("CounterCollection.json");
 
-            Path path = Paths.get(resource.toURI());
+            // Path path = Paths.get(resource.toURI());
 
-            String jsonAsString = new String(Files.readAllBytes(path));
+            // String jsonAsString = new String(Files.readAllBytes(path));
 
-            System.out.println(jsonAsString);
+            String json = "[{\"seqName\":\"Project\",\"seqNumber\":0},{\"seqName\":\"MeetingMinutes\",\"seqNumber\":0},{\"seqName\":\"DailyTimesheet\",\"seqNumber\":0},{\"seqName\":\"WeeklyTimesheet\",\"seqNumber\":0},{\"seqName\":\"ApprovedTimesheet\",\"seqNumber\":0}]";
+
+            System.out.println(json);
 
             // collection.insertOne(Document.parse(jsonAsString));
 
             List<Document> documents = new ArrayList<>();
-            JsonArray jsonArray = Json.createReader(new StringReader(jsonAsString)).readArray();
+            JsonArray jsonArray = Json.createReader(new StringReader(json)).readArray();
 
             for (int i = 0; i < jsonArray.size(); i++) {
                 JsonObject obj = jsonArray.getJsonObject(i);
@@ -67,6 +70,7 @@ public class MongoStartUp {
             }
 
             collection.insertMany(documents);
+
         }
     }
 
