@@ -26,7 +26,6 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import com.zaga.client.PdfService;
 import com.zaga.model.entity.DocumentType;
 import com.zaga.model.entity.PdfEntity;
-import com.zaga.model.entity.TimesheetType;
 import com.zaga.model.entity.WeeklyTimesheet;
 
 import com.zaga.repository.PdfRepository;
@@ -58,9 +57,7 @@ public class WeeklyTimesheetResource {
     @Path("/createTimesheet")
     public Response generateTimesheetPdf(@QueryParam("projectName") String projectName,
             @QueryParam("projectId") String projectId, @QueryParam("startDate") LocalDate startDate,
-            @QueryParam("endDate") LocalDate endDate, @QueryParam("documentType") String documentType,
-            @QueryParam("employeeName") String employeeName,
-            @QueryParam("employeeRole") String employeeRole, @QueryParam("timesheetType") String timesheetType)
+            @QueryParam("endDate") LocalDate endDate, @QueryParam("documentType") String documentType)
             throws IOException {
 
         try {
@@ -77,19 +74,13 @@ public class WeeklyTimesheetResource {
             DocId.append(endDate);
             // Setting PdfEntity properties
             pdfDocument.setDocumentId(DocId.toString());
-            pdfDocument.setProjectId(projectId);
-
-            pdfDocument.setProjectName(projectName);
-
+            pdfDocument.projectId = projectId;
+            pdfDocument.projectName = projectName;
             pdfDocument.startDate = startDate;
             pdfDocument.endDate = endDate;
             pdfDocument.setDocumentType(DocumentType.valueOf(documentType));
             // Generate WeeklyTimesheetbased on input start date and end date
             WeeklyTimesheet timesheetpdf = service.generateWeeeklyTimesheet(projectId, startDate, endDate);
-            timesheetpdf.setEmployeeName(employeeName);
-            timesheetpdf.setEmployeeRole(employeeRole);
-            timesheetpdf.setProjectName(projectName);
-            timesheetpdf.setTimesheetType(TimesheetType.valueOf(timesheetType));
             // persist the weekly timesheet in weekytimesheet database
             timesheetpdf.setWeeklyTimesheetId(DocId.toString());
             WeeklyTimesheet.persist(timesheetpdf);

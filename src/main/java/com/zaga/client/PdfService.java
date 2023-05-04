@@ -1,6 +1,5 @@
 package com.zaga.client;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,7 +11,6 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import com.zaga.model.entity.WeeklyTimesheet;
 
-@ApplicationScoped
 @RegisterRestClient(configKey = "pdf-api")
 public interface PdfService {
 
