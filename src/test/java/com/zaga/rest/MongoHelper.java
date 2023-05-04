@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.concurrent.TimeUnit;
 
+
 public class MongoHelper {
     private MongodExecutable mongodExe;
     private MongodProcess mongod;
@@ -78,9 +79,11 @@ public class MongoHelper {
 
     void stopDB() {
 
+
         mongod.stop();
 
         mongodExe.stop();
+
 
     }
 

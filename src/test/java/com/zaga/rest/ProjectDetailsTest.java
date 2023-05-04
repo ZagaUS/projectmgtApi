@@ -3,8 +3,6 @@ package com.zaga.rest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.mongodb.client.MongoClient;
-
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.*;
@@ -22,8 +20,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 @QuarkusTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -33,9 +29,6 @@ public class ProjectDetailsTest {
         private static String projectName;
         private ProjectDetails createResponse;
         private MeetingMinutes createResponse1;
-
-        @Inject
-        MongoClient mongoClient;
 
         @BeforeAll
         public static void setUp() throws Exception {
@@ -53,10 +46,8 @@ public class ProjectDetailsTest {
         }
 
         @AfterAll
-        public void tearDown() throws Exception {
-                mongoClient.close();
+        public static void tearDown() throws Exception {
                 mongoHelper.stopDB();
-
         }
 
         private String creationResponse() {
@@ -67,7 +58,6 @@ public class ProjectDetailsTest {
         @Order(1)
         void createProjectDetailsApiTest() throws JsonProcessingException {
                 int arbitraryStart = 5;
-
                 LocalDate startDate = LocalDate.now().minusDays(arbitraryStart);
                 LocalDate endDate = LocalDate.now();
                 ProjectDetails projectDetails = ProjectDetails.builder().id(null)
