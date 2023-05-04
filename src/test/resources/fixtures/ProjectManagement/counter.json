@@ -1,22 +1,22 @@
 [
-  {
-    "seqName": "Project",
-    "seqNumber": 0
-  },
-  {
-    "seqName": "MeetingMinutes",
-    "seqNumber": 0
-  },
-  {
-    "seqName": "DailyTimesheet",
-    "seqNumber": 0
-  },
-  {
-    "seqName": "WeeklyTimesheet",
-    "seqNumber": 0
-  },
-  {
-    "seqName": "ApprovedTimesheet",
-    "seqNumber": 0
-  }
+    {
+        "seqName": "Project",
+        "seqNumber": 0
+    },
+    {
+        "seqName": "MeetingMinutes",
+        "seqNumber": 0
+    },
+    {
+        "seqName": "DailyTimesheet",
+        "seqNumber": 0
+    },
+    {
+        "seqName": "WeeklyTimesheet",
+        "seqNumber": 0
+    },
+    {
+        "seqName": "ApprovedTimesheet",
+        "seqNumber": 0
+    }
 ]
