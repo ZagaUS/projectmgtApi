@@ -34,10 +34,10 @@ public class ProjectDetailsTest {
         public static void setUp() throws Exception {
                 mongoHelper = new MongoHelper();
                 mongoHelper.startDB();
-                // mongoHelper.loadCollection(
-                // "ProjectManagement",
-                // "counter",
-                // "fixtures/ProjectManagement/counter.json");
+                mongoHelper.loadCollection(
+                                "ProjectManagement",
+                                "counter",
+                                "fixtures/ProjectManagement/counter.json");
 
                 mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
