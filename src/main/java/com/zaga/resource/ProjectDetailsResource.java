@@ -238,8 +238,8 @@ public class ProjectDetailsResource {
     
     @POST
     @Path("/projectAssignment/{projectId}")
-    public Response assignProject(@PathParam("projectId") String projectId,  @QueryParam("employeeName") String employeeName,@QueryParam("employeeEmail") String employeeEmail, @QueryParam("employeeNumber") String employeeNumber,@QueryParam("employeeId") String employeeId,@QueryParam("employeeRole")String employeeRole){
-       ProjectDetails projectDetails = service.assignProject(projectId, employeeName, employeeEmail, employeeNumber, employeeId, employeeRole);
+    public Response assignProject(@PathParam("projectId") String projectId,  @QueryParam("employeeName") String employeeName,@QueryParam("employeeEmail") String employeeEmail,@QueryParam("employeeId") String employeeId,@QueryParam("employeeRole")String employeeRole){
+       ProjectDetails projectDetails = service.assignProject(projectId, employeeName, employeeEmail,employeeId, employeeRole);
        return Response.ok(projectDetails).build();
 
     }
