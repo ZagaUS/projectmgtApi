@@ -125,12 +125,11 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
     }
 
     @Override
-    public ProjectDetails assignProject(String projectId, String employeeName, String employeeEmail, String employeeNumber,
+    public ProjectDetails assignProject(String projectId, String employeeName, String employeeEmail,
             String employeeId, String employeeRole) {
        ProjectDetails projectDetails = repo.getProjectDetailsById(projectId);
        projectDetails.setEmployeeName(employeeName);
        projectDetails.setEmployeeEmail(employeeEmail);
-       projectDetails.setEmployeeNumber(employeeNumber);
        projectDetails.setEmployeeId(employeeId);
        projectDetails.setEmployeeRole(employeeRole);
        projectDetails.setProjectAssignmentStatus(true);
