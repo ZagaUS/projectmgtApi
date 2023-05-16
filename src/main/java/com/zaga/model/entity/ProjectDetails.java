@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({ "id", "projectType", "clientCurrency" })
+@JsonIgnoreProperties({ "id" })
 @MongoEntity(collection = "ProjectDetails", database = "ProjectManagement")
 public class ProjectDetails extends PanacheMongoEntity implements Serializable {
 

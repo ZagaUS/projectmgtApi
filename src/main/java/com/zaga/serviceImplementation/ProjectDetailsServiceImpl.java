@@ -58,9 +58,12 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
         List<ProjectLimitedDto> projectDtoList = projects.stream()
                 .map(project -> {
                     ProjectLimitedDto dto = new ProjectLimitedDto();
+                    System.out.println("------project stream----- "+project);
                     dto.setProjectId(project.getProjectId());
                     dto.setProjectName(project.getProjectName());
                     dto.setEmployeeName(project.getEmployeeName());
+                    dto.setProjectManager(project.getProjectManager());
+                    dto.setProjectType(project.getProjectType());
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -119,5 +122,22 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
         List<ProjectDetails> details = repo.getProjectDetailsByProjectType(category);
         return details;
     }
+
+    @Override
+    public ProjectDetails assignProject(String projectId, String employeeName, String employeeEmail, String employeeNumber,
+            String employeeId, String employeeRole) {
+       ProjectDetails projectDetails = repo.getProjectDetailsById(projectId);
+       projectDetails.setEmployeeName(employeeName);
+       projectDetails.setEmployeeEmail(employeeEmail);
+       projectDetails.setEmployeeNumber(employeeNumber);
+       projectDetails.setEmployeeId(employeeId);
+       projectDetails.setEmployeeRole(employeeRole);
+       projectDetails.setProjectAssignmentStatus(true);
+       projectDetails.update();  
+       return projectDetails;
+
+    }
+
+   
 
 }
