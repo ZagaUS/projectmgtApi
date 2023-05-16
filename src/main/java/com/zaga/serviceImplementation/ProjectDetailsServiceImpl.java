@@ -9,6 +9,7 @@ import javax.ws.rs.WebApplicationException;
 import org.jboss.logging.Logger;
 import com.zaga.model.entity.ProjectDetails;
 import com.zaga.model.entity.ProjectLimitedDto;
+import com.zaga.model.entity.ProjectType;
 import com.zaga.repository.PdfRepository;
 import com.zaga.repository.ProjectDetailsRepository;
 import com.zaga.repository.SequenceRepository;
@@ -133,6 +134,7 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
        projectDetails.setEmployeeId(employeeId);
        projectDetails.setEmployeeRole(employeeRole);
        projectDetails.setProjectAssignmentStatus(true);
+       projectDetails.setProjectType(ProjectType.Active);
        projectDetails.update();  
        return projectDetails;
 
