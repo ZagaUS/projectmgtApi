@@ -141,8 +141,8 @@ public class WeeklyTimesheetResource {
     }
 
     @DELETE
-    @Path("/deleteWeeklyTimesheet")
-    public WeeklyTimesheet deleteWeeklyTimesheet(String timesheetId) {
-        return service.deleteWeeklyTimesheet(timesheetId);
+    @Path("/deleteWeeklyTimesheet/{weeklyTimesheetId}")
+    public WeeklyTimesheet deleteWeeklyTimesheet(@PathParam("weeklyTimesheetId") String weeklyTimesheetId) {
+        return service.deleteWeeklyTimesheet(weeklyTimesheetId);
     }
 }
