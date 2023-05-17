@@ -15,7 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.eclipse.microprofile.reactive.messaging.Incoming;
+//import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -56,7 +56,7 @@ public class Workflow {
         return Base64.getEncoder().encodeToString(credentials.getBytes());
     }
 
-    @Incoming("po-in")
+    // @Incoming("po-in")
     public void triggerprocess(EventDto message) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
 

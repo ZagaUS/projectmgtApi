@@ -12,5 +12,5 @@ public class ProjectLimitedDto {
     public String projectName;
     public String employeeName;
     public String projectManager;
-    public String projectType;
+    public ProjectType projectType;
 }

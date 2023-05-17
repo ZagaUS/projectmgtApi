@@ -23,8 +23,8 @@ import javax.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.eclipse.microprofile.reactive.messaging.Channel;
-import org.eclipse.microprofile.reactive.messaging.Emitter;
+// import org.eclipse.microprofile.reactive.messaging.Channel;
+// import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.bson.types.Binary;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -48,9 +48,9 @@ public class ProjectDetailsResource {
     // @Channel("mail-out")
     // Emitter<EventDto> eventemitter;
 
-    @Inject
-    @Channel("po-out")
-    Emitter<EventDto> emitter;
+    // @Inject
+    // @Channel("po-out")
+    // Emitter<EventDto> emitter;
 
     @Inject
     ProjectDetailsService service;
@@ -75,7 +75,7 @@ public class ProjectDetailsResource {
                     .eventId(UUID.randomUUID().toString())
                     .eventData(projectDetails2).build();
 
-            emitter.send(poEvent);
+            // emitter.send(poEvent);
 
             return Response.ok(projectDetails2).build();
         } catch (WebApplicationException e) {
@@ -233,6 +233,14 @@ public class ProjectDetailsResource {
         } catch (WebApplicationException e) {
             return Response.status(e.getResponse().getStatus()).entity(e.getMessage()).build();
         }
+
+    }
+    
+    @POST
+    @Path("/projectAssignment/{projectId}")
+    public Response assignProject(@PathParam("projectId") String projectId,  @QueryParam("employeeName") String employeeName,@QueryParam("employeeEmail") String employeeEmail,@QueryParam("employeeId") String employeeId,@QueryParam("employeeRole")String employeeRole){
+       ProjectDetails projectDetails = service.assignProject(projectId, employeeName, employeeEmail,employeeId, employeeRole);
+       return Response.ok(projectDetails).build();
 
     }
 }

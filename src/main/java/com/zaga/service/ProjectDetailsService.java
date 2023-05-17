@@ -21,6 +21,8 @@ public interface ProjectDetailsService {
 
     Boolean canCreate(ProjectDetails projectDetails);
 
+    ProjectDetails assignProject(String projectId, String employeeName, String employeeEmail,  String employeeId, String employeeRole);
+
     // void savePdfDocument(String name, InputStream inputstream) throws IOException
     // ;
 

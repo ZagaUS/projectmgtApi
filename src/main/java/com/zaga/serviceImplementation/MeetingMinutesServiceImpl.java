@@ -39,7 +39,7 @@ public class MeetingMinutesServiceImpl implements MeetingMinutesService {
 
        if(meetingMinutes.isEmpty()) {
 
-        throw new WebApplicationException("The Resource is empty ",404);
+        throw new WebApplicationException("The Resource is empty ",500);
        }
        return meetingMinutes;
     }
@@ -48,11 +48,11 @@ public class MeetingMinutesServiceImpl implements MeetingMinutesService {
     public MeetingMinutes getMeetingMinuteByMeetingMinutesId(String meetingMinutesId) {
        
         if (meetingMinutesId == null){
-            throw new WebApplicationException("MeetingMinutesId is Invalid ",400);
+            throw new WebApplicationException("MeetingMinutesId is Invalid ",500);
         }
         MeetingMinutes meetingminutes = repo.getMeetingMinutesByMeetingMinutesId(meetingMinutesId);
         if (meetingminutes == null){
-            throw new WebApplicationException("The Resource is empty ",404);
+            throw new WebApplicationException("The Resource is empty ",500);
         }
         return meetingminutes;
         
@@ -71,14 +71,14 @@ public class MeetingMinutesServiceImpl implements MeetingMinutesService {
 
       if (minutes.getMeetingMinutesId() == null) {
 
-         throw new WebApplicationException("Invalid Meeting Minutes Id ", 400);
+         throw new WebApplicationException("Invalid Meeting Minutes Id ", 500);
       }
 
       MeetingMinutes meetingMinutes = repo.getMeetingMinutesByMeetingMinutesId(minutes.getMeetingMinutesId());
 
       if (meetingMinutes == null) {
 
-         throw new WebApplicationException("Resource Not Found For Meeting Minutes Id ", 404);
+         throw new WebApplicationException("Resource Not Found For Meeting Minutes Id ", 500);
       }
 
       logger.info("------Meeting Minutes------" + meetingMinutes);
@@ -101,7 +101,7 @@ public class MeetingMinutesServiceImpl implements MeetingMinutesService {
 
       if (meetingMinutesId == null) {
 
-         throw new WebApplicationException("Invalid Meeting Minutes Id ", 400);
+         throw new WebApplicationException("Invalid Meeting Minutes Id ", 500);
 
       }
 

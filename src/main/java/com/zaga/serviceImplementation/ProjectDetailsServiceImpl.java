@@ -9,6 +9,7 @@ import javax.ws.rs.WebApplicationException;
 import org.jboss.logging.Logger;
 import com.zaga.model.entity.ProjectDetails;
 import com.zaga.model.entity.ProjectLimitedDto;
+import com.zaga.model.entity.ProjectType;
 import com.zaga.repository.PdfRepository;
 import com.zaga.repository.ProjectDetailsRepository;
 import com.zaga.repository.SequenceRepository;
@@ -52,15 +53,18 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
 
         if (projects.isEmpty()) {
 
-            throw new WebApplicationException("The Resource is empty ", 404);
+            throw new WebApplicationException("The Resource is empty ", 500);
         }
 
         List<ProjectLimitedDto> projectDtoList = projects.stream()
                 .map(project -> {
                     ProjectLimitedDto dto = new ProjectLimitedDto();
+                    System.out.println("------project stream----- "+project);
                     dto.setProjectId(project.getProjectId());
                     dto.setProjectName(project.getProjectName());
                     dto.setEmployeeName(project.getEmployeeName());
+                    dto.setProjectManager(project.getProjectManager());
+                    dto.setProjectType(project.getProjectType());
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -72,7 +76,7 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
     public ProjectDetails getProjectDetailsById(String projectId) {
         ProjectDetails projectDetails = repo.getProjectDetailsById(projectId);
         if (projectDetails == null) {
-            throw new WebApplicationException("The Resource is empty ", 404);
+            throw new WebApplicationException("The Resource is empty ", 500);
         }
         return projectDetails;
     }
@@ -84,7 +88,7 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
 
         ProjectDetails projectDetails = repo.getProjectDetailsById(dto.getProjectId());
         if (projectDetails == null) {
-            throw new WebApplicationException("The Resource is empty ", 404);
+            throw new WebApplicationException("The Resource is empty ", 500);
         }
 
         ProjectDetails details = dto;
@@ -119,5 +123,23 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
         List<ProjectDetails> details = repo.getProjectDetailsByProjectType(category);
         return details;
     }
+
+    @Override
+    public ProjectDetails assignProject(String projectId, String employeeName, String employeeEmail, 
+            String employeeId, String employeeRole) {
+       ProjectDetails projectDetails = repo.getProjectDetailsById(projectId);
+       projectDetails.setEmployeeName(employeeName);
+       projectDetails.setEmployeeEmail(employeeEmail);
+    //    projectDetails.setEmployeeNumber(employeeNumber);
+       projectDetails.setEmployeeId(employeeId);
+       projectDetails.setEmployeeRole(employeeRole);
+       projectDetails.setProjectAssignmentStatus(true);
+       projectDetails.setProjectType(ProjectType.Active);
+       projectDetails.update();  
+       return projectDetails;
+
+    }
+
+   
 
 }
