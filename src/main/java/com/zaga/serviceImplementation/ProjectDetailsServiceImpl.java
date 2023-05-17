@@ -37,6 +37,7 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
         projectDetails.setProjectId(seqNo);
 
         if (canCreate(projectDetails)) {
+            projectDetails.setProjectType(ProjectType.UnAssigned);
             ProjectDetails.persist(projectDetails);
         } else {
 
