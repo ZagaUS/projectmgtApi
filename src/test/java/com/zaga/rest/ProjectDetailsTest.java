@@ -72,7 +72,7 @@ public class ProjectDetailsTest {
                 LocalDate endDate = LocalDate.now();
                 ProjectDetails projectDetails = ProjectDetails.builder().id(null)
                                 // employee details
-                                .employeeName("sharamua").employeeEmail("").employeeNumber("")
+                                .employeeName("sharamua").employeeEmail("")
                                 .employeeId("2").employeeRole("")
                                 // project details
                                 .projectAssignmentStatus(false).projectManager("").projectId("1")
@@ -137,7 +137,7 @@ public class ProjectDetailsTest {
 
                 ProjectDetails projectDetails = ProjectDetails.builder().id(null)
                                 // employee details
-                                .employeeName("sharamua").employeeEmail("").employeeNumber("")
+                                .employeeName("sharamua").employeeEmail("")
                                 .employeeId("2").employeeRole("")
                                 // project details
                                 .projectAssignmentStatus(false).projectManager("")
