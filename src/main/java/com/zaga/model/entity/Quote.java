@@ -38,7 +38,7 @@ public class Quote extends PanacheMongoEntity {
     public String duration; // peroid
     public String manDays;
     public Float totalPrice;
-    public Float GSTAmount;
+    public Float gstAmount;
     public String employeeRole;
     public String projectName;
     public String gstPercent;
