@@ -10,15 +10,16 @@ import javax.ws.rs.core.Response;
 
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
+import com.zaga.model.entity.Quote;
 import com.zaga.model.entity.WeeklyTimesheet;
 
 @ApplicationScoped
 @RegisterRestClient(configKey = "pdf-api")
 public interface PdfService {
 
-    @GET
-    @Path("/{amount}")
-    public Response generatePdf(@PathParam("amount") String amount);
+    @POST
+    @Path("/quoteGeneration")
+    public Response generatePdf(Quote quote);
 
     @POST
     @Path("/createTimesheet")

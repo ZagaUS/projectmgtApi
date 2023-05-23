@@ -27,6 +27,7 @@ import com.zaga.client.PdfService;
 import com.zaga.model.entity.DocumentType;
 import com.zaga.model.entity.PdfEntity;
 import com.zaga.model.entity.ProjectDetails;
+import com.zaga.model.entity.Quote;
 import com.zaga.model.entity.TimesheetType;
 import com.zaga.model.entity.WeeklyTimesheet;
 
@@ -52,12 +53,6 @@ public class WeeklyTimesheetResource {
 
     @Inject
     ProjectDetailsService pservice;
-
-    @GET
-    @Path("/{amount}")
-    public Response generatePdf(@PathParam("amount") String amount) {
-        return pdfService.generatePdf(amount);
-    }
 
     @POST
     @Path("/createTimesheet")
