@@ -129,6 +129,8 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
     public ProjectDetails assignProject(String projectId, String employeeName, String employeeEmail, 
             String employeeId, String employeeRole) {
        ProjectDetails projectDetails = repo.getProjectDetailsById(projectId);
+       System.out.println(("----------------------------------------------------"));
+       System.out.println(projectDetails);
        projectDetails.setEmployeeName(employeeName);
        projectDetails.setEmployeeEmail(employeeEmail);
     //    projectDetails.setEmployeeNumber(employeeNumber);
