@@ -22,8 +22,8 @@ import lombok.ToString;
 public class Quote extends PanacheMongoEntity{
     
     public ObjectId id;
-    public String quoteStatus;
     public String quoteId;
+    public String quoteStatus;
     public String date; // start date
     public String validDate; // endDate
     public String from; // companyAddress

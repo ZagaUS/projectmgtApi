@@ -24,6 +24,24 @@ public class QuotesServiceImpl implements QuotesService{
         repo.persist(quote);
         return quote;
     }
+
+    @Override
+    public Quote updateQuote(Quote quote) {
+        Quote details = repo.getQuoteById(quote.getQuoteId());
+        Quote quot   = quote;
+        quot.setId(details.getId());
+        Quote.update(quot);
+        return quot;
+
+    }
+
+    @Override
+    public Quote getQuoteById(String quoteId) {
+        Quote  detail = repo.getQuoteById(quoteId);
+        return detail;
+                }
+
+    
     
 
 }

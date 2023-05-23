@@ -24,6 +24,7 @@ public class DailyTimesheet extends PanacheMongoEntity {
     public String projectId;
     public String dailyTimesheetId;
     public String projectName;
+    public String employeeName;
     public Double hours;
     public LocalDate date;
     public String supportTicket;
