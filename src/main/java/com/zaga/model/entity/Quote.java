@@ -19,8 +19,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @JsonIgnoreProperties({ "id" })
 @MongoEntity(collection = "Quotes", database = "ProjectManagement")
-public class Quote extends PanacheMongoEntity{
-    
+public class Quote extends PanacheMongoEntity {
+
     public ObjectId id;
     public String quoteId;
     public String projectId;
@@ -34,13 +34,13 @@ public class Quote extends PanacheMongoEntity{
     public Float unitPrice; // changed fieldname
     public Currency clientCurrency;
     public Float totalAmount; // changed datatype
-    
-    public String duration;   // peroid
+
+    public String duration; // peroid
     public String manDays;
     public Float totalPrice;
-    public Currency GSTAmount;
+    public Float GSTAmount;
     public String employeeRole;
-
-    
+    public String projectName;
+    public String gstPercent;
 
 }
