@@ -1,5 +1,7 @@
 package com.zaga.resource;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -8,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -37,6 +40,19 @@ public class QuoteResource {
       System.out.println(quote);
       return service.createQuotes(quote);
    }
+
+   @GET
+  @Path("/getQuotesByProjectId/{projectId}")
+  public Response getQuotesByProjectId(String projectId){
+    try{
+      List<Quote> quotes = repo.getQuotesByProjectId(projectId);
+      return Response.ok(quotes).build();
+
+    }
+    catch(WebApplicationException e) {
+      return Response.status(e.getResponse().getStatus()).entity(e.getMessage()).build();
+    }
+  }
 
   @PUT
   @Path("/modifiyQuotes")
