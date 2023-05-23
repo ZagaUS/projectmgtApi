@@ -7,6 +7,8 @@ public interface QuotesService {
 
     public Quote getQuoteById(String quoteId);
 
+    public Quote getQuotesByProjectId(String projectId);
+
     public Quote updateQuote(Quote quote);
     
 }

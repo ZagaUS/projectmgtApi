@@ -23,6 +23,7 @@ public class Quote extends PanacheMongoEntity{
     
     public ObjectId id;
     public String quoteId;
+    public String projectId;
     public String quoteStatus;
     public String date; // start date
     public String validDate; // endDate

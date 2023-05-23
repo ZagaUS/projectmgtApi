@@ -1,5 +1,7 @@
 package com.zaga.repository;
 
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 
 import com.zaga.model.entity.Quote;
@@ -14,6 +16,11 @@ public class QuotesRepository implements PanacheMongoRepository<Quote> {
         PanacheQuery<Quote> details = Quote.find("quoteId=?1", quoteId);
         Quote quot = details.firstResult();
         return quot;
+    }
+
+    public List<Quote> getQuotesByProjectId (String projectId) {
+        List<Quote> details = Quote.list("projectId=?1", projectId);
+        return details;
     }
 
 

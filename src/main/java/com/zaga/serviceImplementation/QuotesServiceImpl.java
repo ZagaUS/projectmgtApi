@@ -1,11 +1,15 @@
 package com.zaga.serviceImplementation;
 
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import com.zaga.model.entity.Quote;
 import com.zaga.repository.QuotesRepository;
 import com.zaga.repository.SequenceRepository;
 import com.zaga.service.QuotesService;
+
+// import io.quarkus.arc.lookup.LookupIfProperty.List;
 
 @ApplicationScoped
 public class QuotesServiceImpl implements QuotesService{
@@ -40,6 +44,15 @@ public class QuotesServiceImpl implements QuotesService{
         Quote  detail = repo.getQuoteById(quoteId);
         return detail;
                 }
+
+    @Override
+    public List<Quote> getQuotesByProjectId(String projectId) {
+        List<Quote> details = repo.getQuotesByProjectId(projectId);
+        return details;
+       
+    }
+
+    
 
     
     
