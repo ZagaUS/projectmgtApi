@@ -43,5 +43,7 @@ public class Quote extends PanacheMongoEntity {
     public String employeeName;
     public String projectName;
     public String gstPercent;
-
+    
+    
+    public String quoteName;
 }
