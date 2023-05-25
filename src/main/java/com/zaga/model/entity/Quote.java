@@ -1,7 +1,10 @@
 package com.zaga.model.entity;
 
+import java.time.LocalDate;
+
 import org.bson.types.ObjectId;
 
+import com.aayushatharva.brotli4j.common.annotations.Local;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
@@ -25,8 +28,9 @@ public class Quote extends PanacheMongoEntity {
     public String quoteId;
     public String projectId;
     public String quoteStatus;
-    public String date; // start date
-    public String validDate; // endDate
+    public LocalDate starDate; // start date
+    public LocalDate endDate;
+    public LocalDate validDate; // endDate
     public String from; // companyAddress
     public String to; // clientAddress
     public String serviceDescription;
