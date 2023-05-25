@@ -21,8 +21,10 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import com.zaga.model.entity.PO;
 import com.zaga.model.entity.PdfEntity;
+import com.zaga.model.entity.ProjectDetails;
 import com.zaga.repository.PORepo;
 import com.zaga.repository.PdfRepository;
+import com.zaga.repository.ProjectDetailsRepository;
 
 @Tag(name = "PO", description = "CRUD Operations for PO")
 @Path("/po")
@@ -33,7 +35,8 @@ public class POResource {
     @Inject
     PORepo poRepo;
 
-    // @Inject
+    @Inject
+    ProjectDetailsRepository projRepo;
     // PdfRepository repo;
 
     @POST
@@ -44,6 +47,10 @@ public class POResource {
             @QueryParam("endDate") LocalDate endDate)
             throws IOException {
         // ProjectDetails projectDetails = new ProjectDetails();
+
+        ProjectDetails projData = projRepo.getProjectDetailsById(projectId);
+        projData.setPoStatus(true);
+        projRepo.persistOrUpdate(projData);
 
         System.out.println("projectDetails " + projectName + " " + projectId);
         PO po = new PO();

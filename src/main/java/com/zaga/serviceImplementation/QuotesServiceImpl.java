@@ -35,7 +35,6 @@ public class QuotesServiceImpl implements QuotesService{
         String seqNo = seqRepo.getSequenceCounter("Quotes");
         ProjectDetails projData = projRepo.getProjectDetailsById(quote.getProjectId());
         projData.setQuoteFlag(true);
-        projData.setPoStatus(true);
         projRepo.persistOrUpdate(projData);
         quote.setQuoteId(seqNo);
         repo.persist(quote);
