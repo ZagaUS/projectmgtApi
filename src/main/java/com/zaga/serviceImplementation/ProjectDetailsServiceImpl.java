@@ -73,6 +73,8 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
                     dto.setStartDate(project.getStartDate());
                     dto.setEndDate(project.getEndDate());
                     dto.setUnitPrice(project.getUnitPrice());
+                    dto.setQuoteFlag(project.getQuoteFlag());
+                    dto.setPoStatus(project.getPoStatus());
                     return dto;
                 })
                 .collect(Collectors.toList());
