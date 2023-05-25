@@ -45,6 +45,7 @@ public class ProjectDetails extends PanacheMongoEntity implements Serializable {
 
     // quote datas
     public String quoteStatus;
+    public Boolean quoteFlag;
     public String quoteId;
     public String date; // start date
     public String validDate; // endDate
@@ -60,6 +61,7 @@ public class ProjectDetails extends PanacheMongoEntity implements Serializable {
     public String po;
     public String sfdc;
     public String pa;
+    public Boolean poStatus;
 
     // ProjectType
     public ProjectType projectType;

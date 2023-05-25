@@ -7,8 +7,10 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
 
+import com.zaga.model.entity.ProjectDetails;
 import com.zaga.model.entity.Quote;
 import com.zaga.model.entity.QuoteLimitedDto;
+import com.zaga.repository.ProjectDetailsRepository;
 import com.zaga.repository.QuotesRepository;
 import com.zaga.repository.SequenceRepository;
 import com.zaga.service.QuotesService;
@@ -17,6 +19,9 @@ import com.zaga.service.QuotesService;
 
 @ApplicationScoped
 public class QuotesServiceImpl implements QuotesService{
+
+    @Inject
+    ProjectDetailsRepository projRepo;
 
        @Inject
        QuotesRepository repo;
@@ -28,6 +33,10 @@ public class QuotesServiceImpl implements QuotesService{
     public Quote createQuotes(Quote quote) {
         // String seqNo = sequenceRepository.getSequenceCounter("Quotes");
         String seqNo = seqRepo.getSequenceCounter("Quotes");
+        ProjectDetails projData = projRepo.getProjectDetailsById(quote.getProjectId());
+        projData.setQuoteFlag(true);
+        projData.setPoStatus(true);
+        projRepo.persistOrUpdate(projData);
         quote.setQuoteId(seqNo);
         repo.persist(quote);
         return quote;
