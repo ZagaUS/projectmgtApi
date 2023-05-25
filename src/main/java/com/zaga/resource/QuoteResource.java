@@ -27,6 +27,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import com.zaga.client.PdfService;
 import com.zaga.model.entity.Quote;
+import com.zaga.model.entity.QuoteLimitedDto;
 import com.zaga.model.entity.QuotePdf;
 import com.zaga.repository.QuotePdfRepo;
 import com.zaga.repository.QuotesRepository;
@@ -112,6 +113,13 @@ public class QuoteResource {
     Quote quotedetails = service.getQuoteById(quoteId);
     return Response.ok(quotedetails).build();
 
+  }
+
+  @GET
+  @Path("/viewQuoteDetails/{projectId}")
+  public Response getQuoteDetails(@PathParam("projectId") String projectId){
+      List<QuoteLimitedDto> quoteDetails = service.getQuoteDetails(projectId);
+      return Response.ok(quoteDetails).build();
   }
 
 }

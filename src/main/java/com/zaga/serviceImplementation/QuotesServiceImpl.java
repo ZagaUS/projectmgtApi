@@ -1,10 +1,14 @@
 package com.zaga.serviceImplementation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
+
 import com.zaga.model.entity.Quote;
+import com.zaga.model.entity.QuoteLimitedDto;
 import com.zaga.repository.QuotesRepository;
 import com.zaga.repository.SequenceRepository;
 import com.zaga.service.QuotesService;
@@ -51,6 +55,37 @@ public class QuotesServiceImpl implements QuotesService{
         return details;
        
     }
+
+    @Override
+    public List<QuoteLimitedDto> getQuoteDetails(String projectId) {
+
+         List<Quote> quotes = repo.getQuotesByProjectId(projectId);
+
+         if (quotes.isEmpty()) {
+
+            throw new WebApplicationException("The Resource is empty ", 500);
+        }
+                               List<QuoteLimitedDto> quotedLimitdto  = quotes.stream()
+                               .map(quotee->{
+                                QuoteLimitedDto dto = new QuoteLimitedDto();
+                                System.out.println("------Quote Stream------"+ quotee);
+                                dto.setProjectName(quotee.getProjectName());
+                               dto.setQuoteNumber(quotee.getQuoteId());
+                                dto.setTotalManDays(quotee.getTotalManDays());
+                                dto.setTotalAmount(quotee.getTotalAmount());
+                                dto.setDate(quotee.getDate());
+                                return dto;
+                                 })
+
+                       .collect(Collectors.toList());
+
+                       return quotedLimitdto;
+                
+    }
+
+
+
+    
 
     
 

@@ -24,6 +24,8 @@ public class QuotesRepository implements PanacheMongoRepository<Quote> {
     }
 
 
+    
+
 
 
 }
