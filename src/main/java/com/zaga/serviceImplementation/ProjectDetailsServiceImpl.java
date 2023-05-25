@@ -34,6 +34,7 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
     public ProjectDetails createProjectDetails(ProjectDetails projectDetails) {
         // TODO Auto-generated method stub
         String seqNo = seqRepo.getSequenceCounter("Project");
+        System.out.println(projectDetails);
         projectDetails.setProjectId(seqNo);
 
         if (canCreate(projectDetails)) {
@@ -66,6 +67,12 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
                     dto.setEmployeeName(project.getEmployeeName());
                     dto.setProjectManager(project.getProjectManager());
                     dto.setProjectType(project.getProjectType());
+                    dto.setClientAddress(project.getClientAddress());
+                    dto.setClientCurrency(project.getClientCurrency());
+                    dto.setDuration(project.getDuration());
+                    dto.setStartDate(project.getStartDate());
+                    dto.setEndDate(project.getEndDate());
+                    dto.setUnitPrice(project.getUnitPrice());
                     return dto;
                 })
                 .collect(Collectors.toList());

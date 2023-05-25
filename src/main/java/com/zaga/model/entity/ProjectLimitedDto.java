@@ -1,5 +1,7 @@
 package com.zaga.model.entity;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,4 +15,10 @@ public class ProjectLimitedDto {
     public String employeeName;
     public String projectManager;
     public ProjectType projectType;
+    public String clientAddress;
+    public Currency clientCurrency;
+    public Float unitPrice;
+    public String duration; // reference for period
+    public LocalDate startDate;
+    public LocalDate endDate;
 }
