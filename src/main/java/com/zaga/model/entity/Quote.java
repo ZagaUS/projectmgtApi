@@ -54,4 +54,6 @@ public class Quote extends PanacheMongoEntity {
     public String po;
     public String sfdc;
     public String pa;
+    public Boolean pdfStatus;
+  
 }

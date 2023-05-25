@@ -3,6 +3,7 @@ package com.zaga.repository;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.ws.rs.core.Response;
 
 import com.zaga.model.entity.PO;
 
@@ -19,11 +20,15 @@ public class PORepo implements PanacheMongoRepository<PO> {
         return po;
     }
 
-    public PO viewPOByPoId(String projectId, String poId) {
+    public PO viewPOByPoId(String poId) {
 
-        PanacheQuery<PO> po = PO.find("projectId=?1, poId=?2", projectId,poId);
+        PanacheQuery<PO> po = PO.find("poId=?1",poId);
         PO pd = po.firstResult();
         return pd;
     }
-    
+
+    public void deletePOByPoId(String poId) {
+    PO.delete("poId=?1", poId);
+    }
+
 }

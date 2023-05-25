@@ -54,8 +54,12 @@ public class QuoteResource {
   QuotePdfRepo pdfrepo;
 
   @POST
-  @Path("/generateQuote")
-  public Response generatePdf(Quote quote) throws IOException {
+  @Path("/generateQuote/{quoteId}")
+  public Response generatePdf(@PathParam("quoteId") String quoteId) throws IOException {
+
+    Quote quote = repo.getQuoteById(quoteId);
+
+    System.out.println("quoteId: " + quote.getProjectId());
 
     Response response = pdfService.generatePdf(quote);
 
@@ -66,9 +70,16 @@ public class QuoteResource {
     pdf.setProjectId(quote.getProjectId());
     pdf.setProjectName(quote.getProjectName());
     pdf.setQuoteId(quote.getQuoteId());
+    
+    // quote.setPdfStatus(true);
+    // repo.persistOrUpdate(quote);
+    
+
+  
 
     // persist the pdf document
     pdfrepo.persist(pdf);
+  
 
     return Response.ok(pdf).build();
 

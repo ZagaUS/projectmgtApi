@@ -76,6 +76,7 @@ public class QuotesServiceImpl implements QuotesService{
                                 dto.setTotalManDays(quotee.getTotalManDays());
                                 dto.setTotalAmount(quotee.getTotalAmount());
                                 dto.setValidDate(quotee.getValidDate());
+                                dto.setPdfStatus(quotee.getPdfStatus());
                                 return dto;
                                  })
 

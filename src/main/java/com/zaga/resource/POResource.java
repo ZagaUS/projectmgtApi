@@ -3,13 +3,16 @@ package com.zaga.resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
@@ -78,6 +81,42 @@ public class POResource {
   
       } catch (WebApplicationException e) {
         return Response.status(e.getResponse().getStatus()).entity(e.getMessage()).build();
+      }
+    }
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/viewPO/{poId}")
+    public Response viewPOByDocumentId(@PathParam("poId") String poId) {
+
+        // System.out.println("----------------strted");
+        try {
+            PO po = poRepo.viewPOByPoId(poId);
+            String str = Base64.getEncoder().encodeToString(po.getData().getData());
+
+            // String result =
+            // Binary bin = new Binary(pdf.getData().getData());
+            // System.out.println("--------------------------");
+            // String str = new String(bin.getBytes()
+
+            // System.out.println("-------------------------------");
+            // System.out.println(str);
+            return Response.ok(str).build();
+        } catch (WebApplicationException e) {
+            System.out.println("---------error");
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    @DELETE
+    @Path("/deletePOByPoId/{poId}")
+    public Response deletePOByPoId(@PathParam("poId") String poId) {
+      try {
+        poRepo.deletePOByPoId(poId);
+        return Response.ok().build();
+      } catch (WebApplicationException e) {
+        return Response.status(e.getResponse().getStatusInfo()).entity(e.getMessage()).build();
       }
     }
     
