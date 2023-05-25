@@ -15,5 +15,7 @@ public interface QuotesService {
     public Quote updateQuote(Quote quote);
 
     public List<QuoteLimitedDto> getQuoteDetails(String projectId);
+
+    public void deleteQuote(String quoteId);
     
 }

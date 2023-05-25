@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -121,5 +122,14 @@ public class QuoteResource {
       List<QuoteLimitedDto> quoteDetails = service.getQuoteDetails(projectId);
       return Response.ok(quoteDetails).build();
   }
+
+
+  @DELETE
+  @Path("/deleteQuote/{quoteId}")
+  public void deleteQuotes(@PathParam ("quoteId") String quoteId){
+    service.deleteQuote(quoteId);
+  }
+ 
+  
 
 }

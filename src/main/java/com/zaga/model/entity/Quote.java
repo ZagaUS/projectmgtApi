@@ -50,4 +50,8 @@ public class Quote extends PanacheMongoEntity {
     
     
     public String quoteName;
+
+    public String po;
+    public String sfdc;
+    public String pa;
 }

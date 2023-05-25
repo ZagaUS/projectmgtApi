@@ -63,8 +63,10 @@ public class QuotesServiceImpl implements QuotesService{
 
          if (quotes.isEmpty()) {
 
-            throw new WebApplicationException("The Resource is empty ", 500);
+            return null;
         }
+
+        else{
                                List<QuoteLimitedDto> quotedLimitdto  = quotes.stream()
                                .map(quotee->{
                                 QuoteLimitedDto dto = new QuoteLimitedDto();
@@ -73,14 +75,19 @@ public class QuotesServiceImpl implements QuotesService{
                                dto.setQuoteNumber(quotee.getQuoteId());
                                 dto.setTotalManDays(quotee.getTotalManDays());
                                 dto.setTotalAmount(quotee.getTotalAmount());
-                                dto.setDate(quotee.getDate());
+                                dto.setValidDate(quotee.getValidDate());
                                 return dto;
                                  })
 
                        .collect(Collectors.toList());
 
                        return quotedLimitdto;
-                
+                                }
+    }
+
+    @Override
+    public void deleteQuote(String quoteId) {
+        repo.deleteQuotesById(quoteId);
     }
 
 
