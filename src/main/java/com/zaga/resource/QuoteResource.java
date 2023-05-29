@@ -3,8 +3,10 @@ package com.zaga.resource;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -32,6 +34,7 @@ import com.zaga.model.entity.QuoteLimitedDto;
 import com.zaga.model.entity.QuotePdf;
 import com.zaga.repository.QuotePdfRepo;
 import com.zaga.repository.QuotesRepository;
+import com.zaga.repository.SequenceRepository;
 import com.zaga.service.QuotesService;
 
 @Tag(name = "Quotes", description = "crud operation for Quote")
@@ -50,6 +53,9 @@ public class QuoteResource {
   @Inject
   QuotesService service;
 
+@Inject
+SequenceRepository sequenceRepository;
+
   @Inject
   QuotePdfRepo pdfrepo;
 
@@ -66,13 +72,26 @@ public class QuoteResource {
     byte[] pdfBytes = response.readEntity(byte[].class);
     InputStream inputStream = new ByteArrayInputStream(pdfBytes);
     QuotePdf pdf = new QuotePdf();
+    // String seqNo = sequenceRepository.getSequenceCounter("QuotePdfs");
+    // PdfEntity pdfDocument = new PdfEntity();
+    // StringBuilder DocId = new StringBuilder();
+    // DocId.append(projectName);
+    // DocId.append("_");
+    // DocId.append(startDate);
+    // DocId.append("_");
+    // DocId.append(endDate);
+    // DocId.append("_");
+
+   
+    // DocId.append(seqNo);
+    // pdf.setQuoteName(DocId.toString());
     pdf.setData(new Binary(inputStream.readAllBytes()));
     pdf.setProjectId(quote.getProjectId());
     pdf.setProjectName(quote.getProjectName());
     pdf.setQuoteId(quote.getQuoteId());
     
-    // quote.setPdfStatus(true);
-    // repo.persistOrUpdate(quote);
+    quote.setPdfStatus(true);
+    repo.persistOrUpdate(quote);
     
 
   
@@ -86,9 +105,10 @@ public class QuoteResource {
   }
 
   @GET
-  @Path("/getQuotePdf")
-  public Response viewQuotePdf(@QueryParam("projectId") String projectId, @QueryParam("quoteId") String quoteId) {
-    QuotePdf pdf = pdfrepo.viewPdfDocumentByDocumentId(projectId, quoteId);
+  @Produces(MediaType.TEXT_PLAIN)
+  @Path("/getQuotePdf/")
+  public Response viewQuotePdf( @QueryParam("quoteId") String quoteId) {
+    QuotePdf pdf = pdfrepo.viewPdfDocumentByDocumentId(quoteId);
     String str = Base64.getEncoder().encodeToString(pdf.getData().getData());
     return Response.ok(str).build();
   }
@@ -111,6 +131,31 @@ public class QuoteResource {
       return Response.status(e.getResponse().getStatus()).entity(e.getMessage()).build();
     }
   }
+
+  @GET
+  @Path("/getQuotesPdfByProjectId/{projectId}")
+  public Response getQuotesPdfByProjectId(String projectId) {
+    try {
+      List<QuotePdf> quotes = pdfrepo.getQuote(projectId);
+      return Response.ok(quotes).build();
+
+    } catch (WebApplicationException e) {
+      return Response.status(e.getResponse().getStatus()).entity(e.getMessage()).build();
+    }
+  }
+
+  
+  // @GET
+  // @Path("/getQuotesByPdfStatus/{pdfStatus}")
+  // public Response getQuotesByPdfStatus(Boolean pdfStatus) {
+  //   try {
+  //     List<Quote> quotes = repo.getQuotesByPdfStatus(pdfStatus);
+  //     return Response.ok(quotes).build();
+
+  //   } catch (WebApplicationException e) {
+  //     return Response.status(e.getResponse().getStatus()).entity(e.getMessage()).build();
+  //   }
+  // }
 
   @PUT
   @Path("/modifiyQuotes")
@@ -140,7 +185,27 @@ public class QuoteResource {
   public void deleteQuotes(@PathParam ("quoteId") String quoteId){
     service.deleteQuote(quoteId);
   }
- 
-  
 
+  @DELETE
+  @Path("/deleteQuotePdf/{quoteId}")
+  public void deleteQuotePdf(@PathParam ("quoteId") String quoteId){
+    pdfrepo.deleteQuotesById(quoteId);
+  }
+
+  @GET
+  @Path("/download/{quoteId}")
+  @Produces(MediaType.APPLICATION_OCTET_STREAM)
+  public Response downloadPdf(@PathParam("quoteId") String quoteId) {
+      // ObjectId objectId = new ObjectId(id);
+      QuotePdf pdf = pdfrepo.viewPdfDocumentByDocumentId(quoteId);
+          Binary pdfData = pdf.data;
+          
+          // Set the appropriate response headers
+          Response.ResponseBuilder responseBuilder = Response.ok(pdfData.getData());
+          responseBuilder.header("Content-Disposition", "attachment; filename=download.pdf");
+          responseBuilder.header("Content-Length", String.valueOf(pdfData.length()));
+          
+          return responseBuilder.build();
+      } 
+  
 }

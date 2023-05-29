@@ -53,7 +53,7 @@ public class POResource {
 
         ProjectDetails projData = projRepo.getProjectDetailsById(projectId);
         projData.setPoStatus(true);
-        projRepo.persistOrUpdate(projData);
+       
 
         System.out.println("projectDetails " + projectName + " " + projectId);
         PO po = new PO();
@@ -76,6 +76,7 @@ public class POResource {
         // details.getProjectId();
 
         poRepo.persist(po);
+        projRepo.persistOrUpdate(projData);
         return Response.status(Response.Status.CREATED).build();
     }
 

@@ -23,6 +23,8 @@ public class QuotesRepository implements PanacheMongoRepository<Quote> {
         return details;
     }
 
+  
+
     public void deleteQuotesById (String quoteId){
       Quote.delete("quoteId=?1",quoteId);
     }

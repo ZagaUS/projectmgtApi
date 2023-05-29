@@ -123,6 +123,22 @@ public class WeeklyTimesheetResource {
     }
 
     @GET
+    @Path("/download/{weeklyTimesheetId}")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response downloadPdf(@PathParam("weeklyTimesheetId") String weeklyTimesheetId) {
+        // ObjectId objectId = new ObjectId(id);
+        PdfEntity pdf = repository.viewPdfDocumentByDocumentId(weeklyTimesheetId);
+            Binary pdfData = pdf.data;
+            
+            // Set the appropriate response headers
+            Response.ResponseBuilder responseBuilder = Response.ok(pdfData.getData());
+            responseBuilder.header("Content-Disposition", "attachment; filename=download.pdf");
+            responseBuilder.header("Content-Length", String.valueOf(pdfData.length()));
+            
+            return responseBuilder.build();
+        } 
+
+    @GET
     @Path("/getWeeklyTimesheets")
     public List<WeeklyTimesheet> getWeeklyTimesheets() {
         return service.getWeeklyTimesheets();

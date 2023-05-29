@@ -1,5 +1,7 @@
 package com.zaga.model.entity;
 
+import java.time.LocalDate;
+
 import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 
@@ -22,5 +24,8 @@ public class QuotePdf extends PanacheMongoEntity {
     public String quoteId;
     public String projectName;
     public Binary data;
+    public String quoteName;
+    public LocalDate startDate;
+    public LocalDate endDate;
 
 }
