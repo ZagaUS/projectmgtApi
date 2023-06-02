@@ -158,7 +158,7 @@ SequenceRepository sequenceRepository;
   // }
 
   @PUT
-  @Path("/modifiyQuotes")
+  @Path("/modifyQuotes")
   public Response updateQuotes(Quote quote) {
     service.updateQuote(quote);
     return Response.ok(quote).build();

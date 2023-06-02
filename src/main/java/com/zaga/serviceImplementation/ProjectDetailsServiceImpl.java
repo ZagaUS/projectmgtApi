@@ -7,6 +7,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
 import org.jboss.logging.Logger;
+
+import com.zaga.model.dto.ViewProjectDetails;
 import com.zaga.model.entity.ProjectDetails;
 import com.zaga.model.entity.ProjectLimitedDto;
 import com.zaga.model.entity.ProjectType;
@@ -29,6 +31,9 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
 
     @Inject
     PdfRepository pdfRepo;
+
+    @Inject
+    ViewProjectDetails viewProjectDetails;
 
     @Override
     public ProjectDetails createProjectDetails(ProjectDetails projectDetails) {
@@ -83,14 +88,41 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
     }
 
     @Override
-    public ProjectDetails getProjectDetailsById(String projectId) {
-        ProjectDetails projectDetails = repo.getProjectDetailsById(projectId);
-        if (projectDetails == null) {
+    public ViewProjectDetails getProjectDetailsByProjectId(String projectId) {
+        ProjectDetails project = repo.getProjectDetailsById(projectId);
+        System.out.println(project);
+        if (project == null) {
             throw new WebApplicationException("The Resource is empty ", 500);
         }
-        return projectDetails;
+                  ViewProjectDetails dto = new ViewProjectDetails();
+                    System.out.println("------project stream----- "+project);
+                    // dto.setProjectId(project.getProjectId());
+                    dto.setEmployeeName(project.getEmployeeName());
+                    dto.setEmployeeEmail(project.getEmployeeEmail());
+                    dto.setEmployeeRole(project.getEmployeeRole());
+                    dto.setProjectName(project.getProjectName());                
+                    dto.setProjectManager(project.getProjectManager());
+                    dto.setClientName(project.getClientName());
+                    dto.setClientCountry(project.getClientCountry());
+                    dto.setClientTimezone(project.getClientTimezone());
+                    dto.setClientAddress(project.getClientAddress());
+                    dto.setClientEmail(project.getClientEmail());
+                    dto.setClientCurrency(project.getClientCurrency());            
+                    dto.setDuration(project.getDuration());
+                    dto.setStartDate(project.getStartDate());
+                    dto.setEndDate(project.getEndDate());
+                    dto.setQuoteId(project.getQuoteId());
+                    dto.setValidDate(project.getValidDate());
+                    dto.setProjectId(project.getProjectId());
+                    dto.setTotalManDays(project.getTotalManDays());
+                    dto.setUnitPrice(project.getUnitPrice());
+                    dto.setPo(project.getPo());
+                    dto.setSfdc(project.getSfdc());
+                    dto.setPa(project.getPa());
+                    dto.setProjectType(project.getProjectType());
+                    return dto;
+    
     }
-
     @Override
     public ProjectDetails updateProjectDetails(ProjectDetails dto) {
 
@@ -150,6 +182,15 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
        projectDetails.update();  
        return projectDetails;
 
+    }
+
+    @Override
+    public ProjectDetails getProjectDetailsById(String projectId) {
+        ProjectDetails  details= repo.getProjectDetailsById(projectId);
+        if (details == null){
+            throw new WebApplicationException("The Resource is empty ",500);
+        }
+        return details;
     }
 
    

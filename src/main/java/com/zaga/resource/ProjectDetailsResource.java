@@ -30,6 +30,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 
 import com.zaga.event.EventDto;
+import com.zaga.model.dto.ViewProjectDetails;
 import com.zaga.model.entity.DocumentType;
 import com.zaga.model.entity.PdfEntity;
 import com.zaga.model.entity.ProjectDetails;
@@ -51,6 +52,9 @@ public class ProjectDetailsResource {
     // @Inject
     // @Channel("po-out")
     // Emitter<EventDto> emitter;
+
+    @Inject
+    ViewProjectDetails viewProjectDetails;
 
     @Inject
     ProjectDetailsService service;
@@ -96,7 +100,7 @@ public class ProjectDetailsResource {
     @APIResponse(responseCode = "200", description = "Viewing Project Details by projectId", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(type = SchemaType.OBJECT, implementation = ProjectDetails.class)))
     public Response getProjectDetailsById(@PathParam("projectId") String projectId) {
         try {
-            ProjectDetails projectDetails = service.getProjectDetailsById(projectId);
+            ViewProjectDetails projectDetails = service.getProjectDetailsByProjectId(projectId);
             return Response.ok(projectDetails).build();
         } catch (WebApplicationException e) {
             return Response.status(e.getResponse().getStatus()).entity(e.getMessage()).build();

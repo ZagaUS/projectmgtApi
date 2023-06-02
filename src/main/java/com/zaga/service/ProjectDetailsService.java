@@ -2,6 +2,7 @@ package com.zaga.service;
 
 import java.util.List;
 
+import com.zaga.model.dto.ViewProjectDetails;
 import com.zaga.model.entity.ProjectDetails;
 import com.zaga.model.entity.ProjectLimitedDto;
 
@@ -12,6 +13,8 @@ public interface ProjectDetailsService {
     ProjectDetails updateProjectDetails(ProjectDetails dto);
 
     List<ProjectLimitedDto> getProjectDetails();
+
+    ViewProjectDetails getProjectDetailsByProjectId(String projectId);
 
     List<ProjectDetails> getProjectDetailsbyCategory(String category);
 
