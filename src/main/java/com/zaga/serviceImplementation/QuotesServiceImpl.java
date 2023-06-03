@@ -38,7 +38,7 @@ public class QuotesServiceImpl implements QuotesService{
         projRepo.persistOrUpdate(projData);
         quote.setQuoteId(seqNo);
         projData.setDuration(quote.getDuration());
-        projData.setStartDate(quote.getStartDate());
+        projData.setStartDate(quote.getDate());
         projData.setEndDate(quote.getEndDate());
         projData.setTotalAmount(quote.getTotalAmount());
         projData.setTotalManDays(quote.getTotalManDays());
