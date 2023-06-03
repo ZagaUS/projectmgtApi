@@ -122,7 +122,7 @@ public class ProjectDetailsResource {
     @PUT
     @Path("/updateProjectDetails")
     @APIResponse(responseCode = "200", description = "Updated Project Details mongodb document in the mongodb database by projectId", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(type = SchemaType.OBJECT, implementation = ProjectDetails.class)))
-    public Response updateProjectDetails(ProjectDetails dto) {
+    public Response updateProjectDetails(ViewProjectDetails dto) {
         try {
             System.out.println(dto);
             service.updateProjectDetails(dto);

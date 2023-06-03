@@ -10,7 +10,7 @@ public interface ProjectDetailsService {
 
     ProjectDetails createProjectDetails(ProjectDetails projectDetails);
 
-    ProjectDetails updateProjectDetails(ProjectDetails dto);
+    ViewProjectDetails updateProjectDetails(ViewProjectDetails dto);
 
     List<ProjectLimitedDto> getProjectDetails();
 

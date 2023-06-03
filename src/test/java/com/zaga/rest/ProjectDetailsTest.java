@@ -70,6 +70,7 @@ public class ProjectDetailsTest {
 
                 LocalDate startDate = LocalDate.now().minusDays(arbitraryStart);
                 LocalDate endDate = LocalDate.now();
+                LocalDate validDate = LocalDate.now();
                 ProjectDetails projectDetails = ProjectDetails.builder().id(null)
                                 // employee details
                                 .employeeName("sharamua").employeeEmail("")
@@ -82,7 +83,7 @@ public class ProjectDetailsTest {
                                 .clientAddress("").clientEmail("")
                                 // miscellaneous
                                 .duration("").startDate(startDate).endDate(endDate)
-                                .quoteStatus("").quoteId("").date("").validDate("")
+                                .quoteStatus("").quoteId("").date("").validDate(validDate)
                                 .from(null).to(null).serviceDescription(null).totalManDays(null)
                                 .unitPrice(null).clientCurrency(Currency.EUR).totalAmount(0.0f)
                                 .po("").sfdc("").pa("").projectType(ProjectType.Active)
@@ -134,6 +135,7 @@ public class ProjectDetailsTest {
                 int arbitraryStart = 10;
                 LocalDate startDate = LocalDate.now().minusDays(arbitraryStart);
                 LocalDate endDate = LocalDate.now();
+                LocalDate validDate = LocalDate.now();
 
                 ProjectDetails projectDetails = ProjectDetails.builder().id(null)
                                 // employee details
@@ -147,7 +149,7 @@ public class ProjectDetailsTest {
                                 .clientAddress("").clientEmail("")
                                 // miscellaneous
                                 .duration("").startDate(startDate).endDate(endDate)
-                                .quoteStatus("").quoteId("").date("").validDate("")
+                                .quoteStatus("").quoteId("").date("").validDate(validDate)
                                 .from(null).to(null).serviceDescription(null).totalManDays(null)
                                 .unitPrice(null).clientCurrency(Currency.EUR).totalAmount(0.0f)
                                 .po("").sfdc("").pa("").projectType(ProjectType.Active)

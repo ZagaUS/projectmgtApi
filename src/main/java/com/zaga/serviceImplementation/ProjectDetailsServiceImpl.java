@@ -7,13 +7,16 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
 import org.jboss.logging.Logger;
+import org.jboss.threads.ViewExecutor;
 
 import com.zaga.model.dto.ViewProjectDetails;
 import com.zaga.model.entity.ProjectDetails;
 import com.zaga.model.entity.ProjectLimitedDto;
 import com.zaga.model.entity.ProjectType;
+import com.zaga.model.entity.Quote;
 import com.zaga.repository.PdfRepository;
 import com.zaga.repository.ProjectDetailsRepository;
+import com.zaga.repository.QuotesRepository;
 import com.zaga.repository.SequenceRepository;
 import com.zaga.service.ProjectDetailsService;
 
@@ -28,6 +31,9 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
 
     @Inject
     SequenceRepository seqRepo;
+
+    @Inject
+    QuotesRepository quoteRepo;
 
     @Inject
     PdfRepository pdfRepo;
@@ -124,19 +130,43 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
     
     }
     @Override
-    public ProjectDetails updateProjectDetails(ProjectDetails dto) {
+    public ViewProjectDetails updateProjectDetails(ViewProjectDetails projectDetails) {
 
-        logger.info("Projectdetail inside service implementation " + dto);
+        logger.info("Projectdetail inside service implementation " + projectDetails);
 
-        ProjectDetails projectDetails = repo.getProjectDetailsById(dto.getProjectId());
-        if (projectDetails == null) {
+        ProjectDetails details = repo.getProjectDetailsById(projectDetails.getProjectId());
+        if (details == null) {
             throw new WebApplicationException("The Resource is empty ", 500);
         }
+        
 
-        ProjectDetails details = dto;
-        details.setId(projectDetails.getId());
+        // ViewProjectDetails details = dto;
+        details.setClientAddress(projectDetails.getClientAddress());
+        details.setProjectId(projectDetails.getProjectId());
+        details.setClientCountry(projectDetails.getClientCountry());
+        details.setClientEmail(projectDetails.getClientEmail());
+        details.setClientCurrency(projectDetails.getClientCurrency());
+        details.setClientName(projectDetails.getClientName());
+        details.setClientTimezone(projectDetails.getClientTimezone());
+        details.setDuration(projectDetails.getDuration());
+        details.setEmployeeEmail(projectDetails.getEmployeeEmail());
+        details.setEmployeeName(projectDetails.getEmployeeName());
+        details.setEmployeeRole(projectDetails.getEmployeeRole());
+        details.setEndDate(projectDetails.getEndDate());
+        details.setPa(projectDetails.getPa());
+        details.setPo(projectDetails.getPo());
+        details.setProjectManager(projectDetails.getProjectManager());
+        details.setProjectName(projectDetails.getProjectName());
+        details.setProjectType(projectDetails.getProjectType());
+        details.setQuoteId(projectDetails.getQuoteId());
+        details.setSfdc(projectDetails.getSfdc());
+        details.setStartDate(projectDetails.getStartDate());
+        details.setTotalManDays(projectDetails.getTotalManDays());
+        details.setUnitPrice(projectDetails.getUnitPrice());
+        details.setValidDate(projectDetails.getValidDate());
+        // details.setId(projectDetails.getId());
         ProjectDetails.update(details);
-        return dto;
+        return projectDetails;
 
     }
 
@@ -179,6 +209,10 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
        projectDetails.setEmployeeRole(employeeRole);
        projectDetails.setProjectAssignmentStatus(true);
        projectDetails.setProjectType(ProjectType.Active);
+    //    List<Quote> quote = quoteRepo.getQuotesByProjectId(projectId);
+    //    quote.setEmployeeName(employeeName);
+    //    quote.setEmployeeRole(employeeRole);
+    //    quoteRepo.update(quote);
        projectDetails.update();  
        return projectDetails;
 

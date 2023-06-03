@@ -34,7 +34,7 @@ public class ViewProjectDetails{
     public LocalDate startDate;
     public LocalDate endDate;
     public String quoteId;
-    public String validDate;
+    public LocalDate validDate;
     // public String serviceDescription;
     public Float totalManDays;
     public Float unitPrice;

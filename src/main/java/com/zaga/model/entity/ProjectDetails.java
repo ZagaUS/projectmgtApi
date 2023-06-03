@@ -48,7 +48,7 @@ public class ProjectDetails extends PanacheMongoEntity implements Serializable {
     public Boolean quoteFlag;
     public String quoteId;
     public String date; // start date
-    public String validDate; // endDate
+    public LocalDate validDate; // endDate
     public String from; // companyAddress
     public String to; // clientAddress
     public String serviceDescription;

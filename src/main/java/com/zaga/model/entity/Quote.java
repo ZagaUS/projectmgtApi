@@ -28,13 +28,13 @@ public class Quote extends PanacheMongoEntity {
     public String quoteId;
     public String projectId;
     public String quoteStatus;
-    public LocalDate starDate; // start date
+    public LocalDate startDate; // start date
     public LocalDate endDate;
     public LocalDate validDate;
-    public LocalDate date; // endDate
-    public String from; // companyAddress
+    // public LocalDate date; // endDate
+    // public String from; // companyAddress
     public String to; // clientAddress
-    public String serviceDescription;
+    // public String serviceDescription;
     public Float totalManDays; // changed fieldname
     public Float unitPrice; // changed fieldname
     public Currency clientCurrency;
@@ -50,7 +50,7 @@ public class Quote extends PanacheMongoEntity {
     public String gstPercent;
     
     
-    public String quoteName;
+    // public String quoteName;
 
     public String po;
     public String sfdc;

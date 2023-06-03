@@ -29,9 +29,11 @@ import org.eclipse.microprofile.openapi.models.media.Schema.SchemaType;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import com.zaga.client.PdfService;
+import com.zaga.model.entity.ProjectDetails;
 import com.zaga.model.entity.Quote;
 import com.zaga.model.entity.QuoteLimitedDto;
 import com.zaga.model.entity.QuotePdf;
+import com.zaga.repository.ProjectDetailsRepository;
 import com.zaga.repository.QuotePdfRepo;
 import com.zaga.repository.QuotesRepository;
 import com.zaga.repository.SequenceRepository;
@@ -53,6 +55,8 @@ public class QuoteResource {
   @Inject
   QuotesService service;
 
+  @Inject
+  ProjectDetailsRepository projectRepo;
 @Inject
 SequenceRepository sequenceRepository;
 
@@ -91,6 +95,10 @@ SequenceRepository sequenceRepository;
     pdf.setQuoteId(quote.getQuoteId());
     
     quote.setPdfStatus(true);
+    ProjectDetails projectDetails = projectRepo.getProjectDetailsById(quote.getProjectId());
+    projectDetails.setQuoteId(quote.getQuoteId());
+    projectRepo.update(projectDetails);
+
     repo.persistOrUpdate(quote);
     
 
@@ -161,6 +169,18 @@ SequenceRepository sequenceRepository;
   @Path("/modifyQuotes")
   public Response updateQuotes(Quote quote) {
     service.updateQuote(quote);
+    ProjectDetails projectDetails = projectRepo.getProjectDetailsById(quote.getProjectId());
+    projectDetails.setEndDate(quote.getEndDate());
+    projectDetails.setStartDate(quote.getStartDate());
+    projectDetails.setPa(quote.getPa());
+    projectDetails.setPo(quote.getPo());
+    projectDetails.setSfdc(quote.getSfdc());
+    projectDetails.setUnitPrice(quote.getUnitPrice());
+    projectDetails.setTotalManDays(quote.getTotalManDays());
+    projectDetails.setDuration(quote.getDuration());
+    projectDetails.setValidDate(quote.getValidDate());
+    projectDetails.setTotalAmount(quote.getTotalAmount());
+    projectRepo.update(projectDetails);
     return Response.ok(quote).build();
   }
 
