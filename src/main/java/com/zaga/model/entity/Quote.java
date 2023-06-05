@@ -31,7 +31,7 @@ public class Quote extends PanacheMongoEntity {
     public LocalDate startDate; // start date
     public LocalDate endDate;
     public LocalDate validDate;
-    // public LocalDate date; // endDate
+    public LocalDate date; // start date
     // public String from; // companyAddress
     public String to; // clientAddress
     // public String serviceDescription;

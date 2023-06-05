@@ -1,5 +1,6 @@
 package com.zaga.serviceImplementation;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,13 @@ public class QuotesServiceImpl implements QuotesService{
         projRepo.persistOrUpdate(projData);
         quote.setQuoteId(seqNo);
         projData.setDuration(quote.getDuration());
+        // projData.setDate(quote.getDate());
+        LocalDate localDate = LocalDate.now();
+        String dateString = localDate.toString();
+
+        ProjectDetails projectDetails = new ProjectDetails();
+        projectDetails.setDate(dateString);
+
         projData.setStartDate(quote.getStartDate());
         projData.setEndDate(quote.getEndDate());
         projData.setTotalAmount(quote.getTotalAmount());

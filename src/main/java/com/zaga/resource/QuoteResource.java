@@ -171,7 +171,7 @@ SequenceRepository sequenceRepository;
     service.updateQuote(quote);
     ProjectDetails projectDetails = projectRepo.getProjectDetailsById(quote.getProjectId());
     projectDetails.setEndDate(quote.getEndDate());
-    projectDetails.setStartDate(quote.getStartDate());
+    projectDetails.setStartDate(quote.getDate());
     projectDetails.setPa(quote.getPa());
     projectDetails.setPo(quote.getPo());
     projectDetails.setSfdc(quote.getSfdc());
