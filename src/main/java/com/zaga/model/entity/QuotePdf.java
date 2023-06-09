@@ -2,6 +2,8 @@ package com.zaga.model.entity;
 
 import java.time.LocalDate;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 
@@ -14,6 +16,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+
+@ApplicationScoped
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({ "id" })

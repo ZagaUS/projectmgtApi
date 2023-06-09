@@ -53,6 +53,9 @@ public class QuoteResource {
   QuotesRepository repo;
 
   @Inject
+  QuotePdf quotePdf;
+
+  @Inject
   QuotesService service;
 
   @Inject
@@ -70,12 +73,17 @@ SequenceRepository sequenceRepository;
     Quote quote = repo.getQuoteById(quoteId);
 
     System.out.println("quoteId: " + quote.getProjectId());
-
+    QuotePdf pdf = new QuotePdf();
+   
+    pdf.setProjectId(quote.getProjectId());
+    pdf.setProjectName(quote.getProjectName());
+    pdf.setQuoteId(quote.getQuoteId());
     Response response = pdfService.generatePdf(quote);
 
     byte[] pdfBytes = response.readEntity(byte[].class);
+    System.out.println(pdfBytes);
     InputStream inputStream = new ByteArrayInputStream(pdfBytes);
-    QuotePdf pdf = new QuotePdf();
+    pdf.setData(new Binary(inputStream.readAllBytes()));
     // String seqNo = sequenceRepository.getSequenceCounter("QuotePdfs");
     // PdfEntity pdfDocument = new PdfEntity();
     // StringBuilder DocId = new StringBuilder();
@@ -89,12 +97,11 @@ SequenceRepository sequenceRepository;
    
     // DocId.append(seqNo);
     // pdf.setQuoteName(DocId.toString());
-    pdf.setData(new Binary(inputStream.readAllBytes()));
-    pdf.setProjectId(quote.getProjectId());
-    pdf.setProjectName(quote.getProjectName());
-    pdf.setQuoteId(quote.getQuoteId());
+  
+    System.out.println("----------------------Generating Quote");
     
     quote.setPdfStatus(true);
+    System.out.println(pdf);
     ProjectDetails projectDetails = projectRepo.getProjectDetailsById(quote.getProjectId());
     projectDetails.setQuoteId(quote.getQuoteId());
     projectRepo.update(projectDetails);
