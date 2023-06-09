@@ -96,6 +96,14 @@ public class ProjectDetailsResource {
     }
 
     @GET
+    @Path("/viewProjectDetailsForInvoice")
+    @APIResponse(responseCode = "200", description = "Viewing All Project Details", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(type = SchemaType.ARRAY, implementation = ProjectDetails.class)))
+    public Response getProjectDetailsForInvoice() {
+        List<ViewProjectDetails> projectDetails = service.getProjectDetailsForInvoice();
+        return Response.ok(projectDetails).build();
+    }
+
+    @GET
     @Path("/viewProjectDetailsById/{projectId}")
     @APIResponse(responseCode = "200", description = "Viewing Project Details by projectId", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(type = SchemaType.OBJECT, implementation = ProjectDetails.class)))
     public Response getProjectDetailsById(@PathParam("projectId") String projectId) {

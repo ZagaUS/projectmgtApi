@@ -13,6 +13,7 @@ public interface ProjectDetailsService {
     ViewProjectDetails updateProjectDetails(ViewProjectDetails dto);
 
     List<ProjectLimitedDto> getProjectDetails();
+   List<ViewProjectDetails> getProjectDetailsForInvoice();
 
     ViewProjectDetails getProjectDetailsByProjectId(String projectId);
 

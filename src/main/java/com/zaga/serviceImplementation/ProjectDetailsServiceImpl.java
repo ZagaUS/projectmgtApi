@@ -93,6 +93,43 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
         return projectDtoList;
     }
 
+    
+    @Override
+    public List<ViewProjectDetails> getProjectDetailsForInvoice() {
+
+        List<ProjectDetails> projects = repo.listAll();
+
+        if (projects.isEmpty()) {
+
+            throw new WebApplicationException("The Resource is empty ", 500);
+        }
+
+        List<ViewProjectDetails> projectDtoList = projects.stream()
+                .map(project -> {
+                    ViewProjectDetails dto = new ViewProjectDetails();
+                    System.out.println("------project stream----- "+project);
+                    dto.setProjectId(project.getProjectId());
+                    dto.setProjectName(project.getProjectName());
+                    dto.setEmployeeName(project.getEmployeeName());
+                    dto.setProjectManager(project.getProjectManager());
+                    dto.setProjectType(project.getProjectType());
+                    dto.setClientAddress(project.getClientAddress());
+                    dto.setClientCurrency(project.getClientCurrency());
+                    dto.setDuration(project.getDuration());
+                    dto.setStartDate(project.getStartDate());
+                    dto.setEndDate(project.getEndDate());
+                    dto.setUnitPrice(project.getUnitPrice());
+                    dto.setPo(project.getPo());
+                    dto.setSfdc(project.getSfdc());
+                    dto.setPa(project.getPa());
+                    dto.setTotalManDays(project.getTotalManDays());
+                    return dto;
+                })
+                .collect(Collectors.toList());
+
+        return projectDtoList;
+    }
+
     @Override
     public ViewProjectDetails getProjectDetailsByProjectId(String projectId) {
         ProjectDetails project = repo.getProjectDetailsById(projectId);
