@@ -74,10 +74,11 @@ SequenceRepository sequenceRepository;
 
     System.out.println("quoteId: " + quote.getProjectId());
     QuotePdf pdf = new QuotePdf();
-   
+   System.out.println(quote.getQuoteId());
     pdf.setProjectId(quote.getProjectId());
     pdf.setProjectName(quote.getProjectName());
     pdf.setQuoteId(quote.getQuoteId());
+    System.out.println(pdf.getProjectId());
     Response response = pdfService.generatePdf(quote);
 
     byte[] pdfBytes = response.readEntity(byte[].class);
