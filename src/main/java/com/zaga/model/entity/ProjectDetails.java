@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({ "id", "projectType", "clientCurrency" })
+@JsonIgnoreProperties({ "id" })
 @MongoEntity(collection = "ProjectDetails", database = "ProjectManagement")
 public class ProjectDetails extends PanacheMongoEntity implements Serializable {
 
@@ -26,7 +26,7 @@ public class ProjectDetails extends PanacheMongoEntity implements Serializable {
     // employee datass
     public String employeeName;
     public String employeeEmail;
-    public String employeeNumber;
+    // public String employeeNumber;
     public String employeeId;
     public String employeeRole;
     public boolean projectAssignmentStatus;
@@ -45,9 +45,10 @@ public class ProjectDetails extends PanacheMongoEntity implements Serializable {
 
     // quote datas
     public String quoteStatus;
+    public Boolean quoteFlag;
     public String quoteId;
     public String date; // start date
-    public String validDate; // endDate
+    public LocalDate validDate; // endDate
     public String from; // companyAddress
     public String to; // clientAddress
     public String serviceDescription;
@@ -60,6 +61,7 @@ public class ProjectDetails extends PanacheMongoEntity implements Serializable {
     public String po;
     public String sfdc;
     public String pa;
+    public Boolean poStatus;
 
     // ProjectType
     public ProjectType projectType;

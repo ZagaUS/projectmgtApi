@@ -3,6 +3,8 @@ package com.zaga.rest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.mongodb.client.MongoClient;
+
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.*;
@@ -20,6 +22,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 @QuarkusTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -30,14 +34,17 @@ public class ProjectDetailsTest {
         private ProjectDetails createResponse;
         private MeetingMinutes createResponse1;
 
+        @Inject
+        MongoClient mongoClient;
+
         @BeforeAll
         public static void setUp() throws Exception {
                 mongoHelper = new MongoHelper();
                 mongoHelper.startDB();
-                mongoHelper.loadCollection(
-                                "ProjectManagement",
-                                "counter",
-                                "fixtures/ProjectManagement/counter.json");
+                // mongoHelper.loadCollection(
+                // "ProjectManagement",
+                // "counter",
+                // "fixtures/ProjectManagement/counter.json");
 
                 mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
@@ -46,8 +53,10 @@ public class ProjectDetailsTest {
         }
 
         @AfterAll
-        public static void tearDown() throws Exception {
+        public void tearDown() throws Exception {
+                mongoClient.close();
                 mongoHelper.stopDB();
+
         }
 
         private String creationResponse() {
@@ -58,11 +67,13 @@ public class ProjectDetailsTest {
         @Order(1)
         void createProjectDetailsApiTest() throws JsonProcessingException {
                 int arbitraryStart = 5;
+
                 LocalDate startDate = LocalDate.now().minusDays(arbitraryStart);
                 LocalDate endDate = LocalDate.now();
+                LocalDate validDate = LocalDate.now();
                 ProjectDetails projectDetails = ProjectDetails.builder().id(null)
                                 // employee details
-                                .employeeName("sharamua").employeeEmail("").employeeNumber("")
+                                .employeeName("sharamua").employeeEmail("")
                                 .employeeId("2").employeeRole("")
                                 // project details
                                 .projectAssignmentStatus(false).projectManager("").projectId("1")
@@ -72,7 +83,7 @@ public class ProjectDetailsTest {
                                 .clientAddress("").clientEmail("")
                                 // miscellaneous
                                 .duration("").startDate(startDate).endDate(endDate)
-                                .quoteStatus("").quoteId("").date("").validDate("")
+                                .quoteStatus("").quoteId("").date("").validDate(validDate)
                                 .from(null).to(null).serviceDescription(null).totalManDays(null)
                                 .unitPrice(null).clientCurrency(Currency.EUR).totalAmount(0.0f)
                                 .po("").sfdc("").pa("").projectType(ProjectType.Active)
@@ -124,10 +135,11 @@ public class ProjectDetailsTest {
                 int arbitraryStart = 10;
                 LocalDate startDate = LocalDate.now().minusDays(arbitraryStart);
                 LocalDate endDate = LocalDate.now();
+                LocalDate validDate = LocalDate.now();
 
                 ProjectDetails projectDetails = ProjectDetails.builder().id(null)
                                 // employee details
-                                .employeeName("sharamua").employeeEmail("").employeeNumber("")
+                                .employeeName("sharamua").employeeEmail("")
                                 .employeeId("2").employeeRole("")
                                 // project details
                                 .projectAssignmentStatus(false).projectManager("")
@@ -137,7 +149,7 @@ public class ProjectDetailsTest {
                                 .clientAddress("").clientEmail("")
                                 // miscellaneous
                                 .duration("").startDate(startDate).endDate(endDate)
-                                .quoteStatus("").quoteId("").date("").validDate("")
+                                .quoteStatus("").quoteId("").date("").validDate(validDate)
                                 .from(null).to(null).serviceDescription(null).totalManDays(null)
                                 .unitPrice(null).clientCurrency(Currency.EUR).totalAmount(0.0f)
                                 .po("").sfdc("").pa("").projectType(ProjectType.Active)

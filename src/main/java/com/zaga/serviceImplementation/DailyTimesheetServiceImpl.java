@@ -30,6 +30,7 @@ public class DailyTimesheetServiceImpl implements DailyTimesheetService {
     @Override
     public List<DailyTimesheet> getDailyTimeSheet() {
         List<DailyTimesheet> timesheet = repo.listAll();
+        System.out.println("Timesheet");
         return timesheet;
     }
 
