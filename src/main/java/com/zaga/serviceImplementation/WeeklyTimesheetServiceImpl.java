@@ -112,7 +112,7 @@ public class WeeklyTimesheetServiceImpl implements WeeklyTimesheetService {
         result.setStartDate(startDate);
         result.setEndDate(endDate);
         result.setDuration(sum);
-        System.out.println(result);
+        System.out.println("-------result-" + result);
         return result;
     }
 }

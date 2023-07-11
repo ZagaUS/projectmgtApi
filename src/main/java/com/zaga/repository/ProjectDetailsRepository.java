@@ -2,6 +2,10 @@ package com.zaga.repository;
 
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
+
+import org.jboss.logging.annotations.Param;
+import org.jboss.resteasy.annotations.Query;
+
 import com.zaga.model.entity.ProjectDetails;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import io.quarkus.mongodb.panache.PanacheQuery;

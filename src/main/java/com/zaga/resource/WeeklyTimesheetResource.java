@@ -26,9 +26,13 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import com.zaga.client.PdfService;
 import com.zaga.model.entity.DocumentType;
 import com.zaga.model.entity.PdfEntity;
+import com.zaga.model.entity.ProjectDetails;
+import com.zaga.model.entity.Quote;
+import com.zaga.model.entity.TimesheetType;
 import com.zaga.model.entity.WeeklyTimesheet;
 
 import com.zaga.repository.PdfRepository;
+import com.zaga.service.ProjectDetailsService;
 import com.zaga.service.WeeklyTimesheetService;
 
 @Tag(name = "Weekly Timesheet", description = "CRUD Operations for Project Details")
@@ -47,11 +51,8 @@ public class WeeklyTimesheetResource {
     @Inject
     PdfRepository repository;
 
-    @GET
-    @Path("/{amount}")
-    public Response generatePdf(@PathParam("amount") String amount) {
-        return pdfService.generatePdf(amount);
-    }
+    @Inject
+    ProjectDetailsService pservice;
 
     @POST
     @Path("/createTimesheet")
@@ -74,17 +75,29 @@ public class WeeklyTimesheetResource {
             DocId.append(endDate);
             // Setting PdfEntity properties
             pdfDocument.setDocumentId(DocId.toString());
-            pdfDocument.projectId = projectId;
-            pdfDocument.projectName = projectName;
+            pdfDocument.setProjectId(projectId);
+
+            pdfDocument.setProjectName(projectName);
+
             pdfDocument.startDate = startDate;
             pdfDocument.endDate = endDate;
             pdfDocument.setDocumentType(DocumentType.valueOf(documentType));
+            // get employee details from projectdetails
+
+            ProjectDetails pd = pservice.getProjectDetailsById(projectId);
+
             // Generate WeeklyTimesheetbased on input start date and end date
             WeeklyTimesheet timesheetpdf = service.generateWeeeklyTimesheet(projectId, startDate, endDate);
+            timesheetpdf.setEmployeeName(pd.getEmployeeName());
+            timesheetpdf.setEmployeeRole(pd.getEmployeeRole());
+            timesheetpdf.setProjectName(projectName);
+            timesheetpdf.setTimesheetType(TimesheetType.NOTAPPROVED);
             // persist the weekly timesheet in weekytimesheet database
             timesheetpdf.setWeeklyTimesheetId(DocId.toString());
             WeeklyTimesheet.persist(timesheetpdf);
             // Pdf file obtained from document service
+
+            System.out.println("--------input to service------" + timesheetpdf);
             Response response = pdfService.generateTimesheetPdf(timesheetpdf);
 
             byte[] pdfBytes = response.readEntity(byte[].class);
@@ -108,6 +121,22 @@ public class WeeklyTimesheetResource {
     public WeeklyTimesheet createWeeklyTimesheet(WeeklyTimesheet weeklyTimesheet) {
         return service.createWeeklyTimesheet(weeklyTimesheet);
     }
+
+    @GET
+    @Path("/download/{weeklyTimesheetId}")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response downloadPdf(@PathParam("weeklyTimesheetId") String weeklyTimesheetId) {
+        // ObjectId objectId = new ObjectId(id);
+        PdfEntity pdf = repository.viewPdfDocumentByDocumentId(weeklyTimesheetId);
+            Binary pdfData = pdf.data;
+            
+            // Set the appropriate response headers
+            Response.ResponseBuilder responseBuilder = Response.ok(pdfData.getData());
+            responseBuilder.header("Content-Disposition", "attachment; filename=download.pdf");
+            responseBuilder.header("Content-Length", String.valueOf(pdfData.length()));
+            
+            return responseBuilder.build();
+        } 
 
     @GET
     @Path("/getWeeklyTimesheets")
@@ -141,8 +170,8 @@ public class WeeklyTimesheetResource {
     }
 
     @DELETE
-    @Path("/deleteWeeklyTimesheet")
-    public WeeklyTimesheet deleteWeeklyTimesheet(String timesheetId) {
-        return service.deleteWeeklyTimesheet(timesheetId);
+    @Path("/deleteWeeklyTimesheet/{weeklyTimesheetId}")
+    public WeeklyTimesheet deleteWeeklyTimesheet(@PathParam("weeklyTimesheetId") String weeklyTimesheetId) {
+        return service.deleteWeeklyTimesheet(weeklyTimesheetId);
     }
 }

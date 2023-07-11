@@ -32,4 +32,13 @@ public class PdfRepository implements PanacheMongoRepository<PdfEntity> {
         return pd;
     }
 
+    public PdfEntity viewPdfDocumentByDocumentId(String documentId) {
+        System.out.println("----------" + documentId);
+        // DocumentType dt = DocumentType.valueOf(documentType);
+        PanacheQuery<PdfEntity> pdf = PdfEntity.find("documentId=?1", documentId );
+        PdfEntity pd = pdf.firstResult();
+        System.out.println("------" + pd);
+        return pd;
+    }
+
 }
