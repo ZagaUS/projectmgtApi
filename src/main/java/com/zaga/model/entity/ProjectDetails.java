@@ -39,7 +39,7 @@ public class ProjectDetails extends PanacheMongoEntity implements Serializable {
     public String clientTimezone;
     public String clientAddress;
     public String clientEmail;
-    public String duration; // reference for period
+    // public String duration; // reference for period
     public LocalDate startDate;
     public LocalDate endDate;
 

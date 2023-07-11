@@ -185,7 +185,7 @@ SequenceRepository sequenceRepository;
     projectDetails.setSfdc(quote.getSfdc());
     projectDetails.setUnitPrice(quote.getUnitPrice());
     projectDetails.setTotalManDays(quote.getTotalManDays());
-    projectDetails.setDuration(quote.getDuration());
+    // projectDetails.setDuration(quote.getDuration());
     projectDetails.setValidDate(quote.getValidDate());
     projectDetails.setTotalAmount(quote.getTotalAmount());
     projectRepo.update(projectDetails);

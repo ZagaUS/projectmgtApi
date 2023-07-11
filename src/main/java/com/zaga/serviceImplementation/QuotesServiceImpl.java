@@ -38,7 +38,7 @@ public class QuotesServiceImpl implements QuotesService{
         projData.setQuoteFlag(true);
         projRepo.persistOrUpdate(projData);
         quote.setQuoteId(seqNo);
-        projData.setDuration(quote.getDuration());
+        // projData.setDuration(quote.getDuration());
         // projData.setDate(quote.getDate());
         LocalDate localDate = LocalDate.now();
         String dateString = localDate.toString();

@@ -40,7 +40,7 @@ public class Quote extends PanacheMongoEntity {
     public Currency clientCurrency;
     public Float totalAmount; // changed datatype
 
-    public String duration; // peroid
+    // public String duration; // peroid
     // public String manDays;
     public Float totalPrice;
     public Float whtAmount;

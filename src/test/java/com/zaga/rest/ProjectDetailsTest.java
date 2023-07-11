@@ -82,7 +82,7 @@ public class ProjectDetailsTest {
                                 .clientName("").clientCountry("").clientTimezone("")
                                 .clientAddress("").clientEmail("")
                                 // miscellaneous
-                                .duration("").startDate(startDate).endDate(endDate)
+                                // .duration("").startDate(startDate).endDate(endDate)
                                 .quoteStatus("").quoteId("").date("").validDate(validDate)
                                 .from(null).to(null).serviceDescription(null).totalManDays(null)
                                 .unitPrice(null).clientCurrency(Currency.EUR).totalAmount(0.0f)
@@ -148,7 +148,7 @@ public class ProjectDetailsTest {
                                 .clientName("").clientCountry("").clientTimezone("")
                                 .clientAddress("").clientEmail("")
                                 // miscellaneous
-                                .duration("").startDate(startDate).endDate(endDate)
+                                // .duration("").startDate(startDate).endDate(endDate)
                                 .quoteStatus("").quoteId("").date("").validDate(validDate)
                                 .from(null).to(null).serviceDescription(null).totalManDays(null)
                                 .unitPrice(null).clientCurrency(Currency.EUR).totalAmount(0.0f)

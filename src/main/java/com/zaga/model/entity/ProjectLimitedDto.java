@@ -18,7 +18,7 @@ public class ProjectLimitedDto {
     public String clientAddress;
     public Currency clientCurrency;
     public Float unitPrice;
-    public String duration; // reference for period
+    // public String duration; // reference for period
     public LocalDate startDate;
     public LocalDate endDate;
     public Boolean quoteFlag;

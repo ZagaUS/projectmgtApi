@@ -30,7 +30,7 @@ public class ViewProjectDetails{
     public String clientAddress;
     public String clientEmail;
     public Currency clientCurrency;
-    public String duration; 
+    // public String duration; 
     public LocalDate startDate;
     public LocalDate endDate;
     public String quoteId;

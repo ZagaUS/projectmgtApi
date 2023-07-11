@@ -80,7 +80,7 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
                     dto.setProjectType(project.getProjectType());
                     dto.setClientAddress(project.getClientAddress());
                     dto.setClientCurrency(project.getClientCurrency());
-                    dto.setDuration(project.getDuration());
+                    // dto.setDuration(project.getDuration());
                     dto.setStartDate(project.getStartDate());
                     dto.setEndDate(project.getEndDate());
                     dto.setUnitPrice(project.getUnitPrice());
@@ -115,7 +115,7 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
                     dto.setProjectType(project.getProjectType());
                     dto.setClientAddress(project.getClientAddress());
                     dto.setClientCurrency(project.getClientCurrency());
-                    dto.setDuration(project.getDuration());
+                    // dto.setDuration(project.getDuration());
                     dto.setStartDate(project.getStartDate());
                     dto.setEndDate(project.getEndDate());
                     dto.setUnitPrice(project.getUnitPrice());
@@ -151,7 +151,7 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
                     dto.setClientAddress(project.getClientAddress());
                     dto.setClientEmail(project.getClientEmail());
                     dto.setClientCurrency(project.getClientCurrency());            
-                    dto.setDuration(project.getDuration());
+                    // dto.setDuration(project.getDuration());
                     dto.setStartDate(project.getStartDate());
                     dto.setEndDate(project.getEndDate());
                     dto.setQuoteId(project.getQuoteId());
@@ -185,7 +185,7 @@ public class ProjectDetailsServiceImpl implements ProjectDetailsService {
         details.setClientCurrency(projectDetails.getClientCurrency());
         details.setClientName(projectDetails.getClientName());
         details.setClientTimezone(projectDetails.getClientTimezone());
-        details.setDuration(projectDetails.getDuration());
+        // details.setDuration(projectDetails.getDuration());
         details.setEmployeeEmail(projectDetails.getEmployeeEmail());
         details.setEmployeeName(projectDetails.getEmployeeName());
         details.setEmployeeRole(projectDetails.getEmployeeRole());
