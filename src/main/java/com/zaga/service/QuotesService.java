@@ -1,0 +1,21 @@
+package com.zaga.service;
+
+import java.util.List;
+
+import com.zaga.model.entity.Quote;
+import com.zaga.model.entity.QuoteLimitedDto;
+
+public interface QuotesService {
+    public Quote createQuotes(Quote quote);
+
+    public Quote getQuoteById(String quoteId);
+
+    public List<Quote> getQuotesByProjectId(String projectId);
+
+    public Quote updateQuote(Quote quote);
+
+    public List<QuoteLimitedDto> getQuoteDetails(String projectId);
+
+    public void deleteQuote(String quoteId);
+    
+}
